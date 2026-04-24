@@ -1,6 +1,6 @@
 // PostItem.jsx
 import { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import "./PostItem.css";
@@ -42,7 +42,7 @@ export function PostItem() {
 
     const newId = makeId();
 
-    await axios.post("/api/items", {
+    await api.post("/api/items", {
       id: newId,
       itemName: form.itemName,
       loc: form.loc,
@@ -52,7 +52,7 @@ export function PostItem() {
       status: "active"
     });
 
-    await axios.post("/api/qna", {
+    await api.post("/api/qna", {
       id: Date.now().toString(),
       iId: newId,
       q1: form.q1,
