@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import { Link, useNavigate } from "react-router";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -16,7 +16,7 @@ export function HomePage() {
   }, []);
 
   const loadItems = async () => {
-    const res = await axios.get("/api/items?status=active");
+    const res = await api.get("/api/items?status=active");
     setItems(res.data);
   };
 
