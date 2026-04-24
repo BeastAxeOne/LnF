@@ -1,7 +1,7 @@
 // ConfirmItem.jsx
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import axios from "axios";
+import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import "./ConfirmItem.css";
@@ -34,10 +34,10 @@ export function ConfirmItem() {
   }, []);
 
   const loadData = async () => {
-    const itemRes = await axios.get(`/api/items/${id}`);
+    const itemRes = await api.get(`/api/items/${id}`);
     setItem(itemRes.data);
 
-    const qRes = await axios.get(`/api/qna?iId=${id}`);
+    const qRes = await api.get(`/api/qna?iId=${id}`);
     setQna(qRes.data[0]);
   };
 
@@ -52,7 +52,7 @@ export function ConfirmItem() {
       ans2.trim().toLowerCase() === qna.a2.toLowerCase() &&
       (!qna.a3 || ans3.trim().toLowerCase() === qna.a3.toLowerCase())
     ) {
-      await axios.post("/api/requests", {
+      await api.post("/api/requests", {
         id: Date.now().toString(),
         iId: id,
         mail: mail
