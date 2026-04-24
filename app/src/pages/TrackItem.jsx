@@ -1,6 +1,6 @@
 // TrackItem.jsx
 import { useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ItemCard } from "../components/ItemCard";
@@ -22,7 +22,7 @@ export function TrackItem() {
     }
 
     try {
-      const itemRes = await axios.get(`/api/items/${trackId}`);
+      const itemRes = await api.get(`/api/items/${trackId}`);
       const itemData = itemRes.data;
 
       if (!itemData) {
@@ -31,7 +31,7 @@ export function TrackItem() {
 
       setItem(itemData);
 
-      const reqRes = await axios.get(`/api/requests?iId=${trackId}`);
+      const reqRes = await api.get(`/api/requests?iId=${trackId}`);
       const reqData = reqRes.data;
 
       setRequests(reqData);
@@ -51,7 +51,7 @@ export function TrackItem() {
     try {
       await Promise.all(
         requests.map((r) =>
-          axios.patch(`/api/requests/${r.id}`, {
+          api.patch(`/api/requests/${r.id}`, {
             status: r.id === requestId ? "accepted" : "rejected",
           })
         )
@@ -71,13 +71,13 @@ export function TrackItem() {
     }
 
     try {
-      await axios.post("/api/handovers", {
+      await api.post("/api/handovers", {
         id: Date.now().toString(),
         iId: trackId,
         rId: acceptedRequest.id,
       });
 
-      await axios.patch(`/api/items/${trackId}`, {
+      await api.patch(`/api/items/${trackId}`, {
         status: "closed",
       });
 
