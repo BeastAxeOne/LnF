@@ -1,0 +1,52 @@
+.hero-box {
+  padding: 30px;
+}
+
+.hero-box h1 {
+  margin-bottom: 10px;
+  color: var(--green);
+}
+
+.hero-box p {
+  opacity: 0.9;
+  color: var(--green);
+  font-style: italic;
+}
+
+.hero-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.track-box {
+  margin-top: 25px;
+  padding: 20px;
+}
+
+.track-box h3 {
+  color: var(--green);
+}
+
+.track-input-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.track-input-group button {
+  border-radius: 50px;
+}
+
+.track-input-group input {
+  max-width: 250px;
+  border: 2px solid var(--green);
+  border-radius: 50px;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+}

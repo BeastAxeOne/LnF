@@ -1,0 +1,28 @@
+.about-hero {
+  text-align: center;
+  padding: 30px;
+}
+
+.hero-text {
+  opacity: 0.8;
+}
+
+.about-card {
+  margin-top: 20px;
+}
+
+.about-team-header {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.team-text {
+  opacity: 0.7;
+}
+
+.team-section {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}

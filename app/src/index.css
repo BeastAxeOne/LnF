@@ -1,0 +1,99 @@
+:root {
+  --green: #0b6b3a;
+  --green-dark: #07502b;
+  --bg: #f5f7f6;
+  --card: rgba(255, 255, 255, 0.75);
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Background */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #f5f7f6, #eef4f0);
+  color: #1a1a1a;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Glass Card */
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+/* Grid */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* Inputs */
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  outline: none;
+  background: white;
+}
+
+input:focus {
+  border: 1px solid var(--green);
+}
+
+/* Hover Cards */
+.hover-card {
+  transition: 0.25s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Hero */
+.hero {
+  padding: 60px 0;
+  text-align: center;
+  background: linear-gradient(135deg, var(--green), #12a85b);
+  color: white;
+  border-radius: 0 0 25px 25px;
+}
+
+/* Section spacing */
+.section {
+  margin-top: 40px;
+}

@@ -1,0 +1,45 @@
+/* ConfirmItem.css */
+
+.confirm-container {
+  width: 600px;
+  max-width: 90%;
+}
+
+.confirm-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.confirm-subtitle {
+  opacity: 0.7;
+}
+
+.confirm-item-box {
+  margin-bottom: 20px;
+}
+
+.confirm-form {
+  padding: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.confirm-qbox {
+  margin-top: 10px;
+}
+
+.confirm-btn-box {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.confirm-result {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.confirm-mail {
+  color: var(--green);
+}

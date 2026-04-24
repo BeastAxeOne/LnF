@@ -1,0 +1,41 @@
+.item-card {
+  padding: 18px;
+  border-radius: 16px;
+  transition: 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-title {
+  margin: 0;
+}
+
+.item-details {
+  display: grid;
+  gap: 6px;
+}
+
+.item-text {
+  margin: 0;
+}
+
+.item-note {
+  margin: 0;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.item-status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.item-btn {
+  width: 100%;
+  margin-top: 8px;
+}

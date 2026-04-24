@@ -1,0 +1,51 @@
+form input,
+form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.post-container {
+  width: 600px;
+  max-width: 90%;
+}
+
+.post-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.post-subtitle {
+  opacity: 0.7;
+}
+
+.post-form {
+  padding: 25px 25px 25px 25px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.submit-box {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.success-box {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.item-id {
+  color: var(--green);
+}
+
+.small-text {
+  font-size: 14px;
+  opacity: 0.7;
+}

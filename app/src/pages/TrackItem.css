@@ -1,0 +1,63 @@
+.track-container {
+  width: 600px;
+  max-width: 90%;
+}
+
+.track-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.track-fade {
+  opacity: 0.7;
+}
+
+.track-search-box {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.track-input {
+  max-width: 300px;
+}
+
+.track-btn-box {
+  margin-top: 10px;
+}
+
+.track-round-btn {
+  border-radius: 50px;
+}
+
+.track-item-box {
+  margin-top: 25px;
+}
+
+.track-mb10 {
+  margin-bottom: 10px;
+}
+
+.track-claim-box {
+  margin-top: 20px;
+}
+
+.track-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.track-request-card {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.track-center-box {
+  margin-top: 20px;
+  text-align: center;
+}

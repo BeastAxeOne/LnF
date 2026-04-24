@@ -1,0 +1,48 @@
+input{
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+}
+
+.search-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 420px;
+  z-index: 20;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.search-title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.search-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.search-btn {
+  flex: 1;
+}
+
+.close-btn {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+}
