@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ItemCard } from "../components/ItemCard";
@@ -15,7 +15,7 @@ export function FindItem() {
   }, []);
 
   const loadItems = async () => {
-    const res = await axios.get("/api/items?status=active");
+    const res = await api.get("/api/items?status=active");
     setItems(res.data);
     setFiltered(res.data);
   };
