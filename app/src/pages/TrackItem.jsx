@@ -9,38 +9,43 @@ import { ItemCard } from "../components/ItemCard";
 import "./TrackItem.css";
 
 export function TrackItem() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [trackId, setTrackId] = useState("");
   const [item, setItem] = useState(null);
   const [requests, setRequests] = useState([]);
   const [acceptedRequest, setAcceptedRequest] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  // LOAD FROM URL PARAM
   useEffect(() => {
     const id = searchParams.get("id");
 
     if (id) {
       setTrackId(id);
+      loadItem(id);
     }
-  }, [searchParams]);
+  }, []);
 
-  useEffect(() => {
-    if (trackId) {
-      loadItem();
-    }
-  }, [trackId]);
+  // LOAD ITEM DATA
+  const loadItem = async (id = trackId) => {
+    const cleanId = id.trim();
 
-  const loadItem = async () => {
-    if (!trackId.trim()) {
+    if (!cleanId) {
       setItem(null);
       setRequests([]);
       setAcceptedRequest(null);
-      alert("Enter Item ID first.");
+      setMessage("Enter Item ID first.");
       return;
     }
 
     try {
-      const itemRes = await api.get(`/api/items/${trackId}`);
+      setLoading(true);
+      setMessage("");
+
+      const itemRes = await api.get(`/api/items/${cleanId}`);
       const itemData = itemRes.data;
 
       if (!itemData) {
@@ -49,7 +54,7 @@ export function TrackItem() {
 
       setItem(itemData);
 
-      const reqRes = await api.get(`/api/requests?iId=${trackId}`);
+      const reqRes = await api.get(`/api/requests?iId=${cleanId}`);
       const reqData = reqRes.data;
 
       setRequests(reqData);
@@ -66,11 +71,20 @@ export function TrackItem() {
       setItem(null);
       setRequests([]);
       setAcceptedRequest(null);
+      setMessage("Invalid Item ID");
 
-      alert("Invalid Item ID");
+    } finally {
+      setLoading(false);
     }
   };
 
+  // MANUAL SEARCH
+  const handleTrack = () => {
+    setSearchParams({ id: trackId });
+    loadItem(trackId);
+  };
+
+  // ACCEPT REQUEST
   const handleAcceptRequest = async (requestId) => {
     try {
       await Promise.all(
@@ -79,7 +93,7 @@ export function TrackItem() {
             status:
               r.id === requestId
                 ? "accepted"
-                : "rejected",
+                : "rejected"
           })
         )
       );
@@ -88,13 +102,14 @@ export function TrackItem() {
 
     } catch (err) {
       console.error(err);
-      alert("Failed to accept request");
+      setMessage("Failed to accept request");
     }
   };
 
+  // CONFIRM HANDOVER
   const handleHandover = async () => {
     if (!acceptedRequest) {
-      alert("No accepted request found!");
+      setMessage("No accepted request found.");
       return;
     }
 
@@ -102,20 +117,20 @@ export function TrackItem() {
       await api.post("/api/handovers", {
         id: Date.now().toString(),
         iId: trackId,
-        rId: acceptedRequest.id,
+        rId: acceptedRequest.id
       });
 
       await api.patch(`/api/items/${trackId}`, {
-        status: "closed",
+        status: "closed"
       });
 
-      alert("Handover completed successfully.");
+      setMessage("Handover completed successfully.");
 
       loadItem();
 
     } catch (err) {
       console.error(err);
-      alert("Handover failed");
+      setMessage("Handover failed");
     }
   };
 
@@ -134,30 +149,44 @@ export function TrackItem() {
           </p>
         </div>
 
-        {/* SEARCH BOX */}
+        {/* SEARCH */}
         <div className="glass track-search-box">
+
           <input
             className="track-input"
             type="text"
             placeholder="Enter Item ID (CUET-XXXXX)"
             value={trackId}
-            onChange={(e) =>
-              setTrackId(e.target.value)
-            }
+            onChange={(e) => setTrackId(e.target.value)}
           />
 
           <div className="track-btn-box">
             <button
               className="btn-primary track-round-btn"
-              onClick={loadItem}
+              onClick={handleTrack}
             >
               Track Item
             </button>
           </div>
+
         </div>
 
+        {/* MESSAGE */}
+        {message && (
+          <div className="glass" style={{ marginTop: "15px" }}>
+            {message}
+          </div>
+        )}
+
+        {/* LOADING */}
+        {loading && (
+          <div className="glass" style={{ marginTop: "15px" }}>
+            Loading...
+          </div>
+        )}
+
         {/* ITEM DETAILS */}
-        {item && (
+        {item && !loading && (
           <>
             <div className="glass hover-card track-item-box">
               <h3 className="track-mb10">
@@ -170,8 +199,9 @@ export function TrackItem() {
               />
             </div>
 
-            {/* CLAIM REQUESTS */}
+            {/* CLAIMS */}
             <div className="glass track-claim-box">
+
               <h3>Claim Requests</h3>
 
               {requests.length === 0 ? (
@@ -180,6 +210,7 @@ export function TrackItem() {
                 </p>
               ) : (
                 <div className="track-grid">
+
                   {requests.map((r) => (
                     <div
                       key={r.id}
@@ -195,7 +226,7 @@ export function TrackItem() {
                               r.status === "accepted"
                                 ? "lightgreen"
                                 : "#ff6b6b",
-                            fontWeight: "bold",
+                            fontWeight: "bold"
                           }}
                         >
                           {r.status === "accepted"
@@ -204,33 +235,38 @@ export function TrackItem() {
                         </span>
                       ) : (
                         <>
-                          {r.status !== "accepted" && (
-                            <button
-                              className="btn-primary"
-                              onClick={() =>
-                                handleAcceptRequest(
-                                  r.id
-                                )
-                              }
-                            >
-                              Accept
-                            </button>
-                          )}
-
-                          {r.status === "accepted" && (
+                          {r.status === "accepted" ? (
                             <span
                               style={{
-                                color:
-                                  "lightgreen",
+                                color: "lightgreen"
                               }}
                             >
                               ✔ Accepted
                             </span>
-                          )}
+                          ) : r.status === "rejected" ? (
+                            <span
+                              style={{
+                                color: "#ff6b6b"
+                              }}
+                            >
+                              ✖ Rejected
+                            </span>
+                          ) : !acceptedRequest ? (
+                            <button
+                              className="btn-primary"
+                              onClick={() =>
+                                handleAcceptRequest(r.id)
+                              }
+                            >
+                              Accept
+                            </button>
+                          ) : null}
                         </>
                       )}
+
                     </div>
                   ))}
+
                 </div>
               )}
 
@@ -251,23 +287,20 @@ export function TrackItem() {
                 !acceptedRequest &&
                 requests.length > 0 && (
                   <p className="track-fade">
-                    Accept a request before
-                    handover.
+                    Accept a request before handover.
                   </p>
                 )}
 
-              {/* CLOSED MESSAGE */}
+              {/* CLOSED */}
               {item.status === "closed" && (
                 <p
                   className="track-fade"
-                  style={{
-                    marginTop: "10px",
-                  }}
+                  style={{ marginTop: "10px" }}
                 >
-                  Item has been successfully
-                  recovered.
+                  Item has been successfully recovered.
                 </p>
               )}
+
             </div>
           </>
         )}
