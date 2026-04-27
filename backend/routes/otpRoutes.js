@@ -38,4 +38,21 @@ router.post("/verify", async (req, res) => {
   res.json({ verified: true });
 });
 
+router.get("/test-mail", async (req, res) => {
+  const sendMail = require("../utils/mailer");
+
+  try {
+    await sendMail(
+      "YOUR_GMAIL@gmail.com", // replace with your email
+      "TEST EMAIL FROM SERVER",
+      "If you received this, email system is working."
+    );
+
+    res.send("Email sent successfully");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Email failed");
+  }
+});
+
 module.exports = router;
