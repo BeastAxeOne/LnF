@@ -43,7 +43,7 @@ router.get("/test-mail", async (req, res) => {
 
   try {
     await sendMail(
-      "YOUR_GMAIL@gmail.com", // replace with your email
+      "csetwotwo@gmail.com",
       "TEST EMAIL FROM SERVER",
       "If you received this, email system is working."
     );
