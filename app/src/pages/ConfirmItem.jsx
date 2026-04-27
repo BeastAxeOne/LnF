@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 
 export function ConfirmItem() {
-  const id = sessionStorage.getItem("confirmItemId");
+  const location = useLocation();
+  const id = location.state?.itemId;
 
   const [item, setItem] = useState(null);
   const [qna, setQna] = useState(null);
@@ -92,7 +94,8 @@ export function ConfirmItem() {
     }
   };
 
-  if (!item || !qna) return null;
+  if (!id) return <div>No item selected.</div>;
+  if (!item || !qna) return <div>Loading...</div>;
 
   return (
     <>
