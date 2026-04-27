@@ -89,9 +89,9 @@ export function TrackItem() {
     try {
       await Promise.all(
         requests.map((r) =>
-          api.patch(`/api/requests/${r.id}`, {
+          api.patch(`/api/requests/${r._id}`, {
             status:
-              r.id === requestId
+              r._id === requestId
                 ? "accepted"
                 : "rejected"
           })
