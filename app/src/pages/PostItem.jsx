@@ -123,7 +123,7 @@ export function PostItem() {
         {!verified && (
           <div className="glass">
 
-            <h2>📩 Email Verification</h2>
+            <h2>Verify Your Email Before Making A Post</h2>
 
             <input
               name="mail"
