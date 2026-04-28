@@ -49,3 +49,17 @@ form textarea {
   font-size: 14px;
   opacity: 0.7;
 }
+
+.mail-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mail-row input {
+  flex: 1; /* takes remaining space */
+}
+
+.mail-row button {
+  white-space: nowrap; /* prevents button text wrapping */
+}
