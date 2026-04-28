@@ -136,7 +136,7 @@ export function PostItem() {
             />
 
             <button
-              type="btn-primary"
+              className="btn-primary"
               onClick={sendOtp}
               disabled={cooldown > 0}
             >
@@ -151,7 +151,7 @@ export function PostItem() {
                   onChange={(e) => setOtp(e.target.value)}
                 />
 
-                <button type="btn-primary" onClick={verifyOtp}>
+                <button className="btn-primary" onClick={verifyOtp}>
                   Verify OTP
                 </button>
               </>
@@ -179,7 +179,7 @@ export function PostItem() {
             <input name="q3" placeholder="Question 3 (Optional)" onChange={handleChange} />
             <input name="a3" placeholder="Answer 3 (Optional)" onChange={handleChange} />
 
-            <button type="submit">Submit Post</button>
+            <button className="btn-primary">Submit Post</button>
 
           </form>
         )}
