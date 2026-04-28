@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -28,6 +29,8 @@ export function PostItem() {
 
   const cuetMail =
     /^[a-z0-9._%+-]+@(student\.cuet\.ac\.bd|cuet\.ac\.bd)$/i;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -108,7 +111,7 @@ export function PostItem() {
     });
 
     setItemId(newId);
-    alert("Post successful. Finder will be notified via email.");
+    //alert("Post successful. An email was sent to you with the item Id. Use it for future Item Tracking.");
   };
 
   return (
@@ -133,7 +136,7 @@ export function PostItem() {
             />
 
             <button
-              type="button"
+              type="btn-primary"
               onClick={sendOtp}
               disabled={cooldown > 0}
             >
@@ -148,7 +151,7 @@ export function PostItem() {
                   onChange={(e) => setOtp(e.target.value)}
                 />
 
-                <button type="button" onClick={verifyOtp}>
+                <button type="btn-primary" onClick={verifyOtp}>
                   Verify OTP
                 </button>
               </>
@@ -157,7 +160,7 @@ export function PostItem() {
         )}
 
         {/* STEP 2: FORM */}
-        {verified && (
+        {verified && !itemId && (
           <form onSubmit={handleSubmit} className="glass">
 
             <input name="itemName" placeholder="Item Name" onChange={handleChange} required />
@@ -167,14 +170,14 @@ export function PostItem() {
 
             <h3>Security Questions</h3>
 
-            <input name="q1" placeholder="Q1" onChange={handleChange} required />
-            <input name="a1" placeholder="A1" onChange={handleChange} required />
+            <input name="q1" placeholder="Question 1" onChange={handleChange} required />
+            <input name="a1" placeholder="Answer 1" onChange={handleChange} required />
 
-            <input name="q2" placeholder="Q2" onChange={handleChange} required />
-            <input name="a2" placeholder="A2" onChange={handleChange} required />
+            <input name="q2" placeholder="Question 2" onChange={handleChange} required />
+            <input name="a2" placeholder="Answer 2" onChange={handleChange} required />
 
-            <input name="q3" placeholder="Q3" onChange={handleChange} />
-            <input name="a3" placeholder="A3" onChange={handleChange} />
+            <input name="q3" placeholder="Question 3 (Optional)" onChange={handleChange} />
+            <input name="a3" placeholder="Answer 3 (Optional)" onChange={handleChange} />
 
             <button type="submit">Submit Post</button>
 
@@ -183,7 +186,7 @@ export function PostItem() {
 
         {itemId && (
           <div className="glass">
-            <h2>Item Posted</h2>
+            <h2>Post successful. An email was sent to you with the item Id. Use it for future Item Tracking.</h2>
             <h1>{itemId}</h1>
           </div>
         )}
