@@ -128,20 +128,22 @@ export function PostItem() {
 
             <h2>Verify Your Email Before Making A Post</h2>
 
-            <input
-              name="mail"
-              placeholder="CUET Email"
-              onChange={handleChange}
-              required
-            />
-
-            <button
-              className="btn-primary"
-              onClick={sendOtp}
-              disabled={cooldown > 0}
-            >
-              {cooldown > 0 ? `Wait ${cooldown}s` : "Send OTP"}
-            </button>
+            <div className="mail-row">
+              <input
+                name="mail"
+                placeholder="CUET Email"
+                onChange={handleChange}
+                required
+              />
+            
+              <button
+                className="btn-primary"
+                onClick={sendOtp}
+                disabled={cooldown > 0}
+              >
+                {cooldown > 0 ? `Wait ${cooldown}s` : "Send OTP"}
+              </button>
+            </div>
 
             {otpSent && (
               <>
