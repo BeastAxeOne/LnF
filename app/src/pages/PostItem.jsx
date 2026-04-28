@@ -147,15 +147,17 @@ export function PostItem() {
 
             {otpSent && (
               <>
-                <input
-                  placeholder="Enter OTP"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                />
-
-                <button className="btn-primary" onClick={verifyOtp}>
-                  Verify OTP
-                </button>
+                <div className="mail-row">
+                  <input
+                    placeholder="Enter OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                  />
+  
+                  <button className="btn-primary" onClick={verifyOtp}>
+                    Verify OTP
+                  </button>
+                </div>
               </>
             )}
           </div>
