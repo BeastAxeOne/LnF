@@ -118,7 +118,7 @@ export function PostItem() {
     <>
       <Header />
 
-      <div className="container section" style={{maxwidth="600px", width="70%"}}>
+      <div className="post-container">
 
         <h1>Post Found Item</h1>
 
