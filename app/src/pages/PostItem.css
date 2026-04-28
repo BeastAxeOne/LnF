@@ -6,8 +6,9 @@ form textarea {
 }
 
 .post-container {
-  width: 600px;
-  max-width: 90%;
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
 }
 
 .post-title {
