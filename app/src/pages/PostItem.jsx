@@ -118,7 +118,7 @@ export function PostItem() {
     <>
       <Header />
 
-      <div className="container section">
+      <div className="post-container">
 
         <h1>Post Found Item</h1>
 
