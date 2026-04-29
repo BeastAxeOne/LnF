@@ -6,7 +6,7 @@ const sendMail = async (to, subject, text) => {
     {
       sender: {
         name: "Lost & Found",
-        email: process.env.BREVO_EMAIL
+        email: process.env.EMAIL
       },
       to: [{ email: to }],
       subject,
