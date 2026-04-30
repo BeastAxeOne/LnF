@@ -37,7 +37,7 @@ export function TrackItem() {
       setItem(null);
       setRequests([]);
       setAcceptedRequest(null);
-      setMessage("Enter Item ID first.");
+      alert("Enter Item ID first.");
       return;
     }
 
@@ -71,7 +71,7 @@ export function TrackItem() {
       setItem(null);
       setRequests([]);
       setAcceptedRequest(null);
-      setMessage("Invalid Item ID");
+      alert("Invalid Item ID");
 
     } finally {
       setLoading(false);
@@ -102,14 +102,29 @@ export function TrackItem() {
 
     } catch (err) {
       console.error(err);
-      setMessage("Failed to accept request");
+      alert("Failed to accept request");
+    }
+  };
+
+  const handleCloseItem = async () => {
+    try {
+      await api.patch(`/api/items/${trackId}`, {
+        status: "closed"
+      });
+  
+      alert("Item closed successfully.");
+      loadItem();
+  
+    } catch (err) {
+      console.error(err);
+      alert("Failed to close item");
     }
   };
 
   // CONFIRM HANDOVER
   const handleHandover = async () => {
     if (!acceptedRequest) {
-      setMessage("No accepted request found.");
+      alert("No accepted request found.");
       return;
     }
 
@@ -124,13 +139,13 @@ export function TrackItem() {
         status: "closed"
       });
 
-      setMessage("Handover completed successfully.");
+      alert("Handover completed successfully.");
 
       loadItem();
 
     } catch (err) {
       console.error(err);
-      setMessage("Handover failed");
+      alert("Handover failed");
     }
   };
 
@@ -171,12 +186,13 @@ export function TrackItem() {
 
         </div>
 
-        {/* MESSAGE */}
+        {/* 
         {message && (
           <div className="glass" style={{ marginTop: "15px" }}>
             {message}
           </div>
         )}
+        */}
 
         {/* LOADING */}
         {loading && (
@@ -197,6 +213,17 @@ export function TrackItem() {
                 item={item}
                 showRequest={false}
               />
+
+              {item.status !== "closed" && (
+                <div className="track-center-box">
+                  <button
+                    className="btn-primary"
+                    onClick={handleCloseItem}
+                  >
+                    Close Item
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* CLAIMS */}
