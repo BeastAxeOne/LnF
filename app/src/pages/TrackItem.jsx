@@ -117,7 +117,7 @@ export function TrackItem() {
       await api.post("/api/handovers", {
         id: Date.now().toString(),
         iId: trackId,
-        rId: acceptedRequest.id
+        rId: acceptedRequest._id
       });
 
       await api.patch(`/api/items/${trackId}`, {
@@ -213,7 +213,7 @@ export function TrackItem() {
 
                   {requests.map((r) => (
                     <div
-                      key={r.id}
+                      key={r._id}
                       className="glass track-request-card"
                     >
                       <span>{r.mail}</span>
@@ -255,7 +255,7 @@ export function TrackItem() {
                             <button
                               className="btn-primary"
                               onClick={() =>
-                                handleAcceptRequest(r.id)
+                                handleAcceptRequest(r._id)
                               }
                             >
                               Accept
