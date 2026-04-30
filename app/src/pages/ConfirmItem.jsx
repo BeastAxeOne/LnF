@@ -16,6 +16,7 @@ export function ConfirmItem() {
   const [otpSent, setOtpSent] = useState(false);
   const [verified, setVerified] = useState(false);
   const [cooldown, setCooldown] = useState(0);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
@@ -88,9 +89,11 @@ export function ConfirmItem() {
         mail
       });
 
-      alert("Request submitted. Finder + you will get email confirmation.");
+      setSubmitStatus("success");
+      //alert("Request submitted. Finder + you will get email confirmation.");
     } else {
-      alert("Wrong answers");
+      setSubmitStatus("error");
+      //alert("Wrong answers");
     }
   };
 
@@ -104,8 +107,6 @@ export function ConfirmItem() {
       <div className="confirm-container">
 
         <h1>Prove Ownership</h1>
-
-        <p>{item.itemName}</p>
 
         {/* OTP STEP */}
         {!verified && (
@@ -128,6 +129,8 @@ export function ConfirmItem() {
             </div>
 
             {otpSent && (
+              <div className="confirm-header">{item.itemName}</div>
+            
               <div className="mail-row">
                 <input
                   value={otp}
@@ -137,13 +140,13 @@ export function ConfirmItem() {
                 <button className="btn-primary" onClick={verifyOtp}>
                   Verify OTP
                 </button>
-              </>
+              </div>
             )}
           </div>
         )}
 
         {/* FORM STEP */}
-        {verified && (
+        {verified && submitStatus === null && (
           <div className="glass">
 
             <h3>{qna.q1}</h3>
@@ -163,6 +166,35 @@ export function ConfirmItem() {
               Submit Claim
             </button>
 
+          </div>
+        )}
+
+        {submitStatus === "success" && (
+          <div className="glass">
+            <h2 style={{ color: "lightgreen" }}>
+              ✔ Request Submitted Successfully
+            </h2>
+            <p>
+              Finder + you will get email confirmation.
+            </p>
+          </div>
+        )}
+        
+        {submitStatus === "error" && (
+          <div className="glass">
+            <h2 style={{ color: "#ff6b6b" }}>
+              ✖ Wrong Answers
+            </h2>
+            <p>
+              Your answers did not match. <b>Are you sure you are at the right spot?</>
+            </p>
+        
+            <button
+              className="btn-primary"
+              onClick={() => setSubmitStatus(null)}
+            >
+              Try Again
+            </button>
           </div>
         )}
 
