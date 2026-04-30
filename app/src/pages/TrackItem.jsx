@@ -117,7 +117,7 @@ export function TrackItem() {
   
     } catch (err) {
       console.error(err);
-      alert("Failed to close item");
+      alert("Failed to remove item");
     }
   };
 
