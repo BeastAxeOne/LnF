@@ -101,43 +101,44 @@ export function ConfirmItem() {
     <>
       <Header />
 
-      <div className="container section">
+      <div className="confirm-container">
 
-        <h1>Confirm Item</h1>
+        <h1>Prove Ownership</h1>
 
         <p>{item.itemName}</p>
 
         {/* OTP STEP */}
         {!verified && (
           <div className="glass">
-
-            <input
-              placeholder="CUET Email"
-              value={mail}
-              onChange={(e) => setMail(e.target.value)}
-            />
-
-            <button
-              type="button"
-              onClick={sendOtp}
-              disabled={cooldown > 0}
-            >
-              {cooldown > 0 ? `Wait ${cooldown}s` : "Send OTP"}
-            </button>
+            <h2>Verify Your Email Before Submitting A Request</h2>
+            <div className="mail-row">
+              <input
+                name="mail"
+                placeholder="CUET Email"
+                value={mail}
+                onChange={(e) => setMail(e.target.value)}
+              />
+              <button
+                className="btn-primary"
+                onClick={sendOtp}
+                disabled={cooldown > 0}
+              >
+                {cooldown > 0 ? `Wait ${cooldown}s` : "Send OTP"}
+              </button>
+            </div>
 
             {otpSent && (
-              <>
+              <div className="mail-row">
                 <input
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                 />
 
-                <button onClick={verifyOtp}>
+                <button className="btn-primary" onClick={verifyOtp}>
                   Verify OTP
                 </button>
               </>
             )}
-
           </div>
         )}
 
@@ -158,7 +159,7 @@ export function ConfirmItem() {
               </>
             )}
 
-            <button onClick={handleSubmit}>
+            <button className="btn-primary" onClick={handleSubmit}>
               Submit Claim
             </button>
 
