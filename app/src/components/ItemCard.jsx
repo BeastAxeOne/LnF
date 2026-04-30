@@ -9,12 +9,14 @@ export function ItemCard({ item, showRequest = true }) {
     if (!status) return "#999";
     if (status === "active") return "#0b6b3a";
     if (status === "closed") return "#555";
+    if (status === "removed") return "#c0392b";
     return "#888";
   };
 
   const getStatusText = (status) => {
     if (status === "active") return "Available";
     if (status === "closed") return "Recovered";
+    if (status === "removed") return "Removed";
     return status;
   };
 
