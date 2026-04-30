@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     { status: "closed" }
   );
 
-  const request = await Request.findOne({ id: rId });
+  const request = await Request.findById(rId);
   const item = await Item.findOne({ id: iId });
 
   // notify finder
