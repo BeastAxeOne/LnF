@@ -147,7 +147,7 @@ export function ConfirmItem() {
         {/* FORM STEP */}
         {verified && submitStatus === null && (
           <div className="glass">
-            <div className="confirm-header">{item.itemName}</div>
+            <h3>{item.itemName}</h3>
             
             <h3>{qna.q1}</h3>
             <input onChange={(e) => setAns1(e.target.value)} />
