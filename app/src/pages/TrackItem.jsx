@@ -112,7 +112,7 @@ export function TrackItem() {
         status: "removed"
       });
   
-      alert("Item removed successfully.");
+      //alert("Item removed successfully.");
       loadItem();
   
     } catch (err) {
@@ -139,7 +139,7 @@ export function TrackItem() {
         status: "closed"
       });
 
-      alert("Handover completed successfully.");
+      //alert("Handover completed successfully.");
 
       loadItem();
 
