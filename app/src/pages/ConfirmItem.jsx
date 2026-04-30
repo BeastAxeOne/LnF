@@ -129,8 +129,6 @@ export function ConfirmItem() {
             </div>
 
             {otpSent && (
-              <div className="confirm-header">{item.itemName}</div>
-            
               <div className="mail-row">
                 <input
                   value={otp}
@@ -148,7 +146,8 @@ export function ConfirmItem() {
         {/* FORM STEP */}
         {verified && submitStatus === null && (
           <div className="glass">
-
+            <div className="confirm-header">{item.itemName}</div>
+            
             <h3>{qna.q1}</h3>
             <input onChange={(e) => setAns1(e.target.value)} />
 
@@ -186,7 +185,7 @@ export function ConfirmItem() {
               ✖ Wrong Answers
             </h2>
             <p>
-              Your answers did not match. <b>Are you sure you are at the right spot?</>
+              Your answers did not match. <b>Are you sure you are at the right spot?</b>
             </p>
         
             <button
