@@ -1,4 +1,10 @@
 /* ConfirmItem.css */
+form input,
+form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
 
 .confirm-container {
   width: 90%;
