@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 import api from "../api";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import "./ConfirmItem.css";
 
 export function ConfirmItem() {
   const location = useLocation();
