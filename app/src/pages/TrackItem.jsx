@@ -109,10 +109,10 @@ export function TrackItem() {
   const handleCloseItem = async () => {
     try {
       await api.patch(`/api/items/${trackId}`, {
-        status: "closed"
+        status: "removed"
       });
   
-      alert("Item closed successfully.");
+      alert("Item removed successfully.");
       loadItem();
   
     } catch (err) {
@@ -214,7 +214,7 @@ export function TrackItem() {
                 showRequest={false}
               />
 
-              {item.status !== "closed" && (
+              {item.status !== "removed" && item.status !== "closed" && (
                 <div className="track-center-box">
                   <button
                     className="btn-primary"
@@ -298,7 +298,7 @@ export function TrackItem() {
               )}
 
               {/* HANDOVER */}
-              {item.status !== "closed" &&
+              {item.status !== "closed" && item.status !== "removed" &&
                 acceptedRequest && (
                   <div className="track-center-box">
                     <button
@@ -310,7 +310,7 @@ export function TrackItem() {
                   </div>
                 )}
 
-              {item.status !== "closed" &&
+              {item.status !== "closed" && item.status !== "removed" &&
                 !acceptedRequest &&
                 requests.length > 0 && (
                   <p className="track-fade">
@@ -328,6 +328,14 @@ export function TrackItem() {
                 </p>
               )}
 
+              {item.status === "removed" && (
+                <p
+                  className="track-fade"
+                  style={{ marginTop: "10px" }}
+                >
+                  Item has been removed.
+                </p>
+              )}
             </div>
           </>
         )}
